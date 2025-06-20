@@ -78,12 +78,17 @@ export const apiService = createApi({
             "error"
           );
         } else if (err.status === 401) {
+            if(window.location.pathname?.includes("/dashboard/vote-decison")){
+                return;
+            }
           Toastify(
             "session has expired login, please login to continue ",
             "error"
           );
           localStorage.removeItem("token");
-          window.location.replace("/");
+          
+           window.location.replace("/");
+          
         }
         return err;
       },

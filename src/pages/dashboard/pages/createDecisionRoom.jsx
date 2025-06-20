@@ -51,8 +51,10 @@ const CreateDecisionRoom = () => {
           <button onClick={() => {
             if (contestantNames?.length < 5 && contestantName && !contestantNames?.includes(contestantName?.toLowerCase())) {
               setContestantNames([...contestantNames, contestantName?.toLowerCase()]);
-              setContestantName('')
+              setContestantName('') 
+              return;
             }
+            Toastify('Contestant Can only be 5', 'error')
           }}
             type="button"
             className="p-3 font-bold  text-white  rounded bg-primary
