@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 const DashboardPage = () => {
     return <div>
         <p className="dashboardPage">   Dashboard Page </p>
-        <div className="grid grid-cols-2 md:grid-cols-3 md:gap-6 mt-6 text-gray-600 text-sm">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mt-6 text-gray-600 text-sm">
             <Link className="dashboardLink" to={'/dashboard/create-room'}>
                 <img src={'/vite.svg'} className="block mx-auto" width={60} height={40} />
                 <h1 className="font-bold">Create Decision</h1>

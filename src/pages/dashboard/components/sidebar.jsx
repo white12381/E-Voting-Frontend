@@ -8,34 +8,26 @@ import List from "../../../assets/images/list.png"
 const SideBar = ({ open, setOpen }) => {
   const user = localStorage.getItem('token')
   const sideBarLinks = [
-    {
-      imageUrl: "/assets/images/Globe.png",
-      imageAlt: "Localization",
-      title: "Localization",
-      href: "/language-preference",
+    {  
+      title: "Dashboard",
+      href: "/dashboard",
 
     },
-
-    {
-      imageUrl: "/assets/images/home.png",
-      imageAlt: "Home",
-      title: "Home",
-      href: "/",
+     {  
+      title: "Create Decision Room",
+      href: "/dashboard/create-room",
     },
 
-    {
-      imageUrl: "/assets/images/about_us.png",
-      imageAlt: "About us",
-      title: "About us",
-      href: "/about-us",
+      {  
+      title: "My Rooms",
+      href: "/dashboard/my-rooms",
     },
 
-    {
-      imageUrl: "/assets/images/lists.png",
-      imageAlt: "lists",
-      title: "My listings",
-      href: "/my-listings"
-    }
+     {  
+      title: "Vote",
+      href: "/dashboard/vote-decison",
+    },
+   
   ];
 
   const [drawerWidth, setDrawerWidth] = useState("20%");

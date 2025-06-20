@@ -1,10 +1,25 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useApiServicePostMutation } from "../app/api/apiService";
+import { Toastify } from "../utils/Toastify/toast";
+import Loader from "../component/loader";
 
 const Login = () => {
+  const [login, { isLoading }] = useApiServicePostMutation()
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/authenticated/dashboard");
+    try {
+      const datas = {
+        "email": e.target.email.value?.toLowerCase(),
+        "password": e.target.password.value
+      }
+      const response = await login({ path: '/user/login', datas }).unwrap()
+      response && localStorage.setItem('token', response.token)
+      response && localStorage.setItem('userInfo', JSON.stringify(response.user))
+      response && navigate('/dashboard')
+    } catch (err) {
+      Toastify(err.data.error, 'error')
+    }
   };
   return (
     <div className="grid md:grid-cols-2 gap-4 h-screen">
@@ -26,12 +41,12 @@ const Login = () => {
             Sign in to continue
           </p>
           <div className="space-y-1">
-            <label className="label">Email or Username</label>
-            <input className="input" />
+            <label className="label">Email </label>
+            <input type="email" className="input" name="email" />
           </div>
           <div className="space-y-1 mt-2 lg:mt-4">
             <label className="label">Password</label>
-            <input type="password" className="input" />
+            <input name="password" type="password" className="input" />
           </div>
           <div className="text-[10px] md:text-xs flex justify-between items-baseline mt-1">
             <div className="flex gap-1 items-center">
@@ -44,7 +59,7 @@ const Login = () => {
               Forgot Password?
             </Link>
           </div>
-          <button className="btn">Log In</button>
+          <button className="btn">{isLoading ? <Loader/> : "Log In"}</button>
         </form>
         <p className="text-xs text-black text-center">
           Don&apos;t have any account?{" "}

@@ -1,9 +1,22 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useApiServicePostMutation } from "../app/api/apiService";
+import { Toastify } from "../utils/Toastify/toast";
+import Loader from "../component/loader";
 
-const ForgotPassword = () => {
-    const navigate = useNavigate();
-    const handleSubmit = e => {
-        e.preventDefault(); navigate('/reset-password');
+const ForgotPassword = () => { 
+      const [forgotPassword, { isLoading }] = useApiServicePostMutation()
+    const handleSubmit = async (e) => {
+        e.preventDefault(); 
+        try {
+              const datas = {
+                "email": e.target.email.value?.toLowerCase(),
+                 "url": window.location.origin + "/reset-password"
+              }
+              const response = await forgotPassword({ path: '/user/forgot-password', datas }).unwrap() 
+              response && Toastify('Please check your mail to continue', "success") 
+            } catch (err) {
+              Toastify(err.data.error, 'error')
+            }
     }
   return (
     <div className="grid md:grid-cols-2 gap-4 h-screen">
@@ -23,9 +36,9 @@ const ForgotPassword = () => {
           </p>
           <div className="space-y-1">
             <label className="label">Email</label>
-            <input className="input" type="Email" />
+            <input name="email"  className="input" type="email" />
           </div>
-          <button className="btn">Submit</button>
+          <button className="btn">{isLoading ? <Loader/> : "Submit"}</button>
         </form>
         <p className="text-xs text-black text-center">
           Don&apos;t have any account?{" "}

@@ -1,16 +1,19 @@
-import { useState } from "react"
+import { useState } from "react";
 import Search from "../../../assets/images/MagnifyingGlass.svg";
-const SearchForm = () => {
-    const [search, setSearch] = useState('');
+import Loader from "../../../component/loader";
+const SearchForm = ({ setSearch, isFetching }) => {
+    const [input, setInput] = useState('')
     return <form
-
+        onSubmit={e => {
+            e.preventDefault(); setSearch(input); setSearch(input);
+        }}
         className="mx-auto  gap-4 lg:gap-14 items-center w-full  md:w-2/3 lg:w-1/2 flex space-x-1 mt-6"
     >
         <div className="col-span-3 w-full flex items-center p-3 justify-between space-x-4 rounded-md border-[#6E9170] border-[1.15px]">
             <img src={Search} alt="search" className="inline" />
             <input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
                 name="search"
                 type="search"
                 className="outline-none w-full  font-normal text-base font-nunito text-[#3D3838]"
@@ -25,7 +28,7 @@ const SearchForm = () => {
                 className="p-3 font-bold  text-white  rounded bg-primary
                   hover:bg-primary text-sm font-nunito text-center mx-auto md:col-span-3"
             >
-                Search
+                {isFetching ? <Loader/> : "Search"}
             </button>{" "}
         </div>
     </form>

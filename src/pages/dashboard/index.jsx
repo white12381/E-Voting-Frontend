@@ -1,12 +1,20 @@
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import Navbar from "./components/navbar"
 import DashboardPage from "./pages"
 import CreateDecisionRoom from "./pages/createDecisionRoom"
 import VeiwDecisionRooms from "./pages/veiwDecisionRooms"
 import VeiwDecisionRoom from "./pages/veiwDecisionRoom"
 import VoteDecisionRoom from "./pages/voteDecisionRoom"
+import { useEffect } from "react"
 
 const Dashboard = () => {
+    const pathname = useLocation()
+    const navigate = useNavigate();
+    useEffect(() => {
+if(!localStorage.getItem('token')){
+navigate('/')
+}
+    },[pathname])
     return <>
         <Navbar />
         <div className="mt-20 px-4 md:px-6 lg:px-10">

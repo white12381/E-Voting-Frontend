@@ -1,6 +1,11 @@
 import { Table } from "antd";
+import { useParams } from "react-router-dom";
+import { useApIServiceGetQuery } from "../../../app/api/apiService";
 
 const VeiwDecisionRoom = () => {
+    const {id} = useParams()
+    
+        const {  data: Room } = useApIServiceGetQuery(`/voting/room/${id}`); 
     const columns = [
         {
             title: 'Name',
@@ -12,19 +17,20 @@ const VeiwDecisionRoom = () => {
             dataIndex: 'count',
             key: 'count',
         },
-    ]
-    const data = [
-        {
-            key: '1', count: 30, name: "Usman Gbolahan"
-        }
-    ];
+    ] 
+    const candidateCounts = new Map();
+Room?.voters?.forEach((voter) => {
+  const count = candidateCounts.get(voter?.candidateName) || 0;
+  candidateCounts.set(voter?.candidateName, count + 1);
+});
+
+const data = Array.from(candidateCounts, ([candidateName, count]) => ({ name: candidateName, count}));
     return <>
-        <h1 className="dashboardPage">   Room 1 </h1>
+        <h1 className="dashboardPage">   {Room?.room?.title} </h1>
         <p className="mt-4 text-sm text-gray-600 font-semibold">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus repellendus similique fuga quia exercitationem labore, quis omnis soluta, officiis dolorum corrupti. Veniam alias ipsa doloribus inventore reiciendis doloremque voluptate et?
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, deserunt eius incidunt eum temporibus fuga iure dolores tempore reiciendis. Esse exercitationem ab quas. Ut adipisci, maxime doloribus tenetur commodi eos?
+      {Room?.room?.description}
         </p>
-        <h2 className="dashboardPage my-6">   Contenstant </h2>
+        <h2 className="dashboardPage my-6">   Contestant </h2>
 
         <Table columns={columns} dataSource={data} />
 
