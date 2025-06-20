@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import SearchForm from "../components/searchForm"
 import { useApIServiceGetQuery, useApiServicePostMutation } from "../../../app/api/apiService";
-import { Toastify } from "../../../utils/Toastify/toast";
-import { useNavigate } from "react-router-dom";
+import { Toastify } from "../../../utils/Toastify/toast"; 
 import Loader from "../../../component/loader";
 
 const VoteDecisionRoom = () => {
