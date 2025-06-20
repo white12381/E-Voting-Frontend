@@ -11,8 +11,7 @@ const VoteDecisionRoom = () => {
   const id = searchParams.get('id');
   useEffect(() => {
     setSearch(id)
-  }, [id]);
-  const navigate = useNavigate();
+  }, [id]); 
   const formRef = useRef()
   const [vote, { isLoading }] = useApiServicePostMutation()
   const { data, isFetching } = useApIServiceGetQuery(`/voting/room/${search}`)
