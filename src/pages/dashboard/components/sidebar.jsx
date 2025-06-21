@@ -10,22 +10,30 @@ const SideBar = ({ open, setOpen }) => {
   const sideBarLinks = [
     {  
       title: "Dashboard",
-      href: "/dashboard",
+      href: "/dashboard", className: !user && "!hidden",
 
     },
      {  
       title: "Create Decision Room",
-      href: "/dashboard/create-room",
+      href: "/dashboard/create-room", className: !user && "!hidden"
     },
 
       {  
-      title: "My Rooms",
+      title: "My Rooms", className: !user && "!hidden",
       href: "/dashboard/my-rooms",
     },
 
      {  
       title: "Vote",
-      href: "/dashboard/vote-decison",
+      href: "/dashboard/vote-decison", className: !user && "!hidden"
+    },
+      {  
+      title: "Login",
+      href: "/", className: user && "!hidden"
+    },
+      {  
+      title: "Register",
+      href: "/register", className: user && "!hidden"
     },
    
   ];

@@ -30,7 +30,9 @@ const Navbar = () => {
       <div>
         <img src={'/vite.svg'} className='w-12 h-12' alt='Logo' />
       </div>
-      <div className='hidden md:flex space-x-4 md:space-x-10'>
+    <div className='hidden md:flex space-x-4 md:space-x-10'>
+  {  localStorage.getItem('token') ?
+  <>
         <Link to='/dashboard'
           className={`homeNavLink ${pathname === "/dashboard" && "underline"}`}>Dashboard</Link>
 
@@ -40,17 +42,29 @@ const Navbar = () => {
          className={`homeNavLink ${pathname?.includes('my-room') && "underline"}`}>My Rooms</Link>
            <Link to='/dashboard/vote-decison'
          className={`homeNavLink ${pathname?.includes('vote-decison') && "underline"}`}>Vote</Link>
-      </div>
+   </> : <>
+    <Link to='/'
+          className={`homeNavLink ${pathname === "/" && "underline"}`}>Login</Link>
+
+              <Link to='/'
+          className={`homeNavLink ${pathname === "/register" && "underline"}`}>Register</Link>
+   </>
+}
+      </div>: 
+      
+   
       <aside className="flex items-center gap-x-2 text-sm">
-        <p className="text-Sec03 text-sm hidden md:block">Hi, Olasunkanmi Usman</p>
+ { localStorage.getItem('token') && <>
+        <p className="text-Sec03 text-sm hidden md:block">Hi,{JSON.parse(localStorage.getItem('userInfo'))?.fullName}</p>
         <Dropdown placement="bottom" menu={{ items: logoutItems }}>
           <div className="flex space-x-2">
             <div className={'relative h-10 text-center  pt-1 text-xl w-10 rounded-full bg-primary text-white'}>
-              U
+              {JSON.parse(localStorage.getItem('userInfo'))?.fullName?.[0]}
             </div>
-            <DownOutlined className="mx-1 text-primary" />
-          </div>
-        </Dropdown>
+            <DownOutlined className="mx-1 text-primary" /> 
+          </div> 
+        </Dropdown> </>}
+    
         <img
           onClick={() => setOpenDrawal(true)}
           className="cursor-pointer md:hidden"
@@ -59,7 +73,7 @@ const Navbar = () => {
           width={24}
           height={24}
         />
-      </aside>
+      </aside> 
 
     </div>
     <SideBar open={openDrawal} setOpen={setOpenDrawal} />

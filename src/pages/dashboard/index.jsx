@@ -21,8 +21,7 @@ const Dashboard = () => {
       navigate('/');
     }
   }, [pathname, navigate]);
-    return <>
-        <Navbar />
+    return <> <Navbar /> 
         <div className="mt-20 px-4 md:px-6 lg:px-10">
             <Routes>
                 <Route index={true} element={<DashboardPage />} />
