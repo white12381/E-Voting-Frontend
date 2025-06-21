@@ -32,11 +32,9 @@ const SideBar = ({ open, setOpen }) => {
 
   const [drawerWidth, setDrawerWidth] = useState("20%");
   const handleLogout = () => {
-
-    if (typeof window !== "undefined") {
+ 
       localStorage.clear();
-      window.location.href = "/";
-    }
+      window.location.href = "/"; 
   };
   useEffect(() => {
     const updateDrawerWidth = () => {

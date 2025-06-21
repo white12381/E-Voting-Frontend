@@ -10,10 +10,9 @@ const Navbar = () => {
 
   const handleLogout = () => {
 
-    if (typeof window !== "undefined") {
-      localStorage.clear();
+      localStorage.clear(); 
       window.location.href = "/";
-    }
+    
   };
   const logoutItems = [
     {
