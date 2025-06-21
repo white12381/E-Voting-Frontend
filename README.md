@@ -53,8 +53,8 @@ frontend/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/inside-success-nigeria.git
-cd inside-success-nigeria/frontend
+git clone https://github.com/white12381/E-Voting-Frontend.git
+cd inside-success-nigeria/E-Voting-Frontend
 ````
 
 ### 2. Install Dependencies
@@ -66,8 +66,7 @@ npm install
 ### 3. Create a `.env` File
 
 ```env
-VITE_API_URL=http://localhost:5000/api
-```
+VITE_BACKEND_URL=http://localhost:5000/api/``
 
 > Use your production backend URL when deploying.
 
@@ -212,5 +211,4 @@ MIT License. Free to use and modify.
 - Auth flow
 - Deployment instructions
 
-Let me know if you'd like me to generate a matching `vite.config.js` or Tailwind setup as well!
 ```
